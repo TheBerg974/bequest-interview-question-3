@@ -28,8 +28,20 @@ function App() {
     await getData();
   };
 
+  const corruptData = async () => {
+    const response = await fetch(`${API_URL}/corrupt`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    const { data } = await response.json();
+    setData(data);
+  };
+
   const verifyData = async () => {
-    throw new Error("Not implemented");
+    await getData();
   };
 
   return (
@@ -61,6 +73,9 @@ function App() {
         </button>
         <button style={{ fontSize: "20px" }} onClick={verifyData}>
           Verify Data
+        </button>
+        <button style={{ fontSize: "20px" }} onClick={corruptData}>
+          Corrupt Data
         </button>
       </div>
     </div>
